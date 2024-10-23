@@ -4,8 +4,10 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - run: python job.py
+      - uses: action/checkout@v4
+      - run: docker compose build ml_model
+      - run: docker tag ml_model clovisdyarx/tp2-mlops
+      - run: docker login -u ${{LOGIN_SECRET}} -p ${{PAT_SECRET}}
+      - run: docker push clovisdyarx/tp2-mlops
+      - run: ssh ubuntu@20.86.55.5 "docker compose pull clovisdyarx/tp2-mlops"
+      - rn: "(re)start container"

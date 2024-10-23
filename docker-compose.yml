@@ -1,0 +1,8 @@
+services:
+    api:
+        build: .
+        container_name: "api"
+        ports:
+            - 8016:8016
+        volumes:
+            - .:/app
