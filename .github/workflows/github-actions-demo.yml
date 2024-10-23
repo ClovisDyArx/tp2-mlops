@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker compose build api
-      - run: docker tag api clovisdyarx/tp2-mlops
+      - run: docker compose build ml_model
+      - run: docker tag ml_model ${{secrets.LOGIN_SECRET}}/tp2-mlops
       - run: docker login -u ${{secrets.LOGIN_SECRET}} -p ${{secrets.PAT_SECRET}}
-      - run: docker push clovisdyarx/tp2-mlops
-      - run: ssh ubuntu@20.86.55.5 "docker compose pull clovisdyarx/tp2-mlops"
+      - run: docker push ${{secrets.LOGIN_SECRET}}/tp2-mlops
+      - run: ssh ubuntu@20.86.55.5 "docker compose pull ${{secrets.LOGIN_SECRET}}/tp2-mlops"
       - run: "(re)start container"
