@@ -11,5 +11,5 @@ jobs:
       - run: docker push ${{secrets.LOGIN_SECRET}}/tp2-mlops
       - run: sshpass -p "${{secrets.SSH_PASSWORD}}" ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} -o StrictHostKeyChecking=no << 'EOF'
       - run: docker image pull ${{secrets.LOGIN_SECRET}}/tp2-mlops
-      - run: docker run ${{secrets.LOGIN_SECRET}}/tp2-mlops:latest
+      - run: docker run -d ${{secrets.LOGIN_SECRET}}/tp2-mlops:latest
       - run: echo "DONE !"
