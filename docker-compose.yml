@@ -1,6 +1,6 @@
 version: '3'
 services:
-  house-price-prediction:
+  ml_model:
     image: ml_model
     build: .
     ports:
